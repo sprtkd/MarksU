@@ -2,9 +2,11 @@
 A Marks upload website using Bootstrap and Flask
 
 # To Run
+```
 pip install -r requirements.txt
 python run.py
 open localhost:5000 
+```
 
 # Preview
 
