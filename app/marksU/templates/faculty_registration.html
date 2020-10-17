@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+
+  <link rel="apple-touch-icon" sizes="57x57" href="/static/MarksUFavicon/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/static/MarksUFavicon/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/static/MarksUFavicon/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/static/MarksUFavicon/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/static/MarksUFavicon/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/static/MarksUFavicon/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/static/MarksUFavicon/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/static/MarksUFavicon/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/static/MarksUFavicon/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="/static/MarksUFavicon/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/static/MarksUFavicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/static/MarksUFavicon/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/static/MarksUFavicon/favicon-16x16.png">
+  <link rel="manifest" href="/static/MarksUFavicon/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/static/MarksUFavicon/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <title>
+    MarksU -Simplifying Marks Upload and Verification-
+  </title>
+  <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
+  <!--     Fonts and icons     -->
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
+  <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Righteous" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Cinzel:700" rel="stylesheet">
+
+  <!-- CSS Files -->
+  <link href="/static/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="/static/css/now-ui-kit.css" rel="stylesheet" />
+  <link href="/static/css/myedits.css" rel="stylesheet" />
+  <link href="/static/css/bootstrap-select.min.css" rel="stylesheet" />
+</head>
+
+<body class="login-page sidebar-collapse">
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg bg-primary fixed-top navbar-transparent " color-on-scroll="100">
+    <div class="container">
+      <div class="navbar-translate">
+        <a class="navbar-brand" href="index.html" rel="tooltip" title="Home" data-placement="bottom">
+          <img src="/static/MarksUFavicon/android-icon-48x48.png" alt="Thumbnail Image" class="img-raised">
+        </a>
+        <a class="category" style="font-size:20px; color:White;">MarksU</a>
+        <button class="navbar-toggler navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-bar top-bar"></span>
+          <span class="navbar-toggler-bar middle-bar"></span>
+          <span class="navbar-toggler-bar bottom-bar"></span>
+        </button>
+      </div>
+      <div class="collapse navbar-collapse justify-content-end" id="navigation" data-nav-image="/static/img/blurred-image-1.jpg">
+        <ul class="navbar-nav">
+
+          <li class="nav-item">
+            <a class="nav-link" href="choose_registration.html" rel="tooltip" title="MarksU Home" data-placement="bottom">
+              <i class="now-ui-icons arrows-1_minimal-left"></i>
+              <p>Back to Type Selection</p>
+            </a>
+          </li>
+
+
+        {% if is_coe_loggedIn==False %}
+        <li class="nav-item">
+          <a class="nav-link" href="login.html" rel="tooltip" title="Go Back to Login" data-placement="bottom">
+            <i class="now-ui-icons sport_user-run"></i>
+            <p>Login</p>
+          </a>
+        </li>
+        {% else %}
+        <li class="nav-item">
+          <a class="nav-link" href="profile_redirect" rel="tooltip" title="Go To Admin Dashboard" data-placement="bottom">
+          <i class="now-ui-icons loader_gear spin"></i>
+            <p>Hi Admin</p>
+          </a>
+        </li>
+        {% endif %}
+
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <!-- End Navbar -->
+
+  <div class="page-header clear-filter" filter-color="orange">
+    <div class="page-header-image" style="background-image:url(/static/img/login.jpg)"></div>
+
+
+
+
+    <div class="container">
+
+      <!-- Notifications -->
+      {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+      {% for category, message in messages %}
+      <div class="alert alert-{{category}}" role="alert">
+        <div class="container">
+          <div class="alert-icon">
+            <i class="now-ui-icons ui-1_bell-53"></i>
+          </div>
+          <strong>{{message}}</strong>
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close" onmouseover="this.style.color='black';" onmouseout="this.style.color='';">
+            <span aria-hidden="true">
+              <i class="now-ui-icons ui-1_simple-remove"></i>
+            </span>
+          </button>
+        </div>
+      </div>
+      {% endfor %}
+      {% endif %}
+       {% endwith %}
+      <!-- Notifications -->
+
+
+
+      <div class="col-md-4 ml-auto mr-auto">
+
+      <div class="card card-login card-plain d-print-block RegisterDiv">
+        <form class="form" method="post" action="">
+
+          {{ form.hidden_tag() }}
+
+          <img src="/static/img/default-avatar.png" alt="" class="rounded-circle img-raised">
+          <div class="card-body">
+            <h3 style="font-family: 'Righteous', cursive;">Faculty Registration</h3>
+
+            <div class="input-group no-border input-lg">
+              <div class="input-group-prepend">
+                <span class="input-group-text">
+                  <i class="now-ui-icons users_circle-08"></i>
+                </span>
+              </div>
+              <!-- <input type="text" class="form-control" placeholder="Name"> -->
+              {% if form.name.errors %}
+              {{ form.name(class="form-control form-control-lg is-invalid", placeholder="Name") }}
+              <div class="invalid-feedback">
+                {% for error in form.name.errors %}
+                <span> {{error}} </span>
+                {% endfor %}
+              </div>
+              {% else %}
+              {{ form.name(class="form-control form-control-lg", placeholder="Name") }}
+              {% endif %}
+            </div>
+
+            <div class="input-group no-border input-lg">
+              <div class="input-group-prepend">
+                <span class="input-group-text">
+                  <i class="now-ui-icons tech_mobile"></i>
+                </span>
+              </div>
+              <!-- <input type="text" class="form-control" placeholder="Phone">
+              <input type="email" class="form-control" placeholder="Email id"> -->
+              {% if form.phone.errors %}
+              {{ form.phone(class="form-control form-control-lg is-invalid", placeholder="Phone") }}
+              <div class="invalid-feedback">
+                {% for error in form.phone.errors %}
+                <span> {{error}} </span>
+                {% endfor %}
+              </div>
+              {% else %}
+              {{ form.phone(class="form-control form-control-lg", placeholder="Phone") }}
+              {% endif %}
+
+              {% if form.email.errors %}
+              {{ form.email(class="form-control form-control-lg is-invalid", placeholder="Email") }}
+              <div class="invalid-feedback">
+                {% for error in form.email.errors %}
+                <span> {{error}} </span>
+                {% endfor %}
+              </div>
+              {% else %}
+              {{ form.email(class="form-control form-control-lg", placeholder="Email") }}
+              {% endif %}
+
+            </div>
+
+
+            <div class="input-group no-border input-lg">
+              <div class="input-group-prepend">
+                <span class="input-group-text">
+                  <i class="now-ui-icons shopping_shop"></i>
+                </span>
+              </div>
+              <!-- <input type="text" class="form-control" placeholder="Address"> -->
+              {% if form.address.errors %}
+              {{ form.address(class="form-control form-control-lg is-invalid", placeholder="Address") }}
+              <div class="invalid-feedback">
+                {% for error in form.address.errors %}
+                <span> {{error}} </span>
+                {% endfor %}
+              </div>
+              {% else %}
+              {{ form.address(class="form-control form-control-lg", placeholder="Address") }}
+              {% endif %}
+            </div>
+
+
+            <div class="input-group no-border input-lg">
+              <div class="input-group-prepend">
+                <span class="input-group-text">
+                <i class="now-ui-icons location_pin"></i>
+                </span>
+              </div>
+              <!-- <input type="text" class="form-control" placeholder="City">
+              <input type="text" class="form-control" placeholder="Pincode">
+              <input type="text" class="form-control" placeholder="Country"> -->
+              {% if form.city.errors %}
+              {{ form.city(class="form-control form-control-lg is-invalid", placeholder="City") }}
+              <div class="invalid-feedback">
+                {% for error in form.city.errors %}
+                <span> {{error}} </span>
+                {% endfor %}
+              </div>
+              {% else %}
+              {{ form.city(class="form-control form-control-lg", placeholder="City") }}
+              {% endif %}
+
+              {% if form.pincode.errors %}
+              {{ form.pincode(class="form-control form-control-lg is-invalid", placeholder="Pincode") }}
+              <div class="invalid-feedback">
+                {% for error in form.pincode.errors %}
+                <span> {{error}} </span>
+                {% endfor %}
+              </div>
+              {% else %}
+              {{ form.pincode(class="form-control form-control-lg", placeholder="Pincode") }}
+              {% endif %}
+
+              {% if form.country.errors %}
+              {{ form.country(class="form-control form-control-lg is-invalid", placeholder="Country") }}
+              <div class="invalid-feedback">
+                {% for error in form.country.errors %}
+                <span> {{error}} </span>
+                {% endfor %}
+              </div>
+              {% else %}
+              {{ form.country(class="form-control form-control-lg", placeholder="Country") }}
+              {% endif %}
+            </div>
+
+            <div class="input-group no-border input-lg">
+              <div class="input-group-prepend">
+                <span class="input-group-text">
+                  <i class="now-ui-icons design-2_ruler-pencil"></i>
+                </span>
+              </div>
+              <!-- <input type="text" class="form-control" placeholder="Faculty Id"> -->
+
+              {% if form.faculty_id.errors %}
+              {{ form.faculty_id(class="form-control form-control-lg is-invalid", placeholder="Faculty ID") }}
+              <div class="invalid-feedback">
+                {% for error in form.faculty_id.errors %}
+                <span> {{error}} </span>
+                {% endfor %}
+              </div>
+              {% else %}
+              {{ form.faculty_id(class="form-control form-control-lg", placeholder="Faculty ID") }}
+              {% endif %}
+            </div>
+
+            <div class="input-group no-border input-lg">
+              <div class="input-group-prepend">
+                <span class="input-group-text">
+                  <i class="now-ui-icons education_agenda-bookmark"></i>
+                </span>
+              </div>
+
+              <!-- <input type="text" class="form-control" placeholder="Department"> -->
+              {% if form.department.errors %}
+              {{ form.department(class="form-control form-control-lg is-invalid", placeholder="Department") }}
+              <div class="invalid-feedback">
+                {% for error in form.department.errors %}
+                <span> {{error}} </span>
+                {% endfor %}
+              </div>
+              {% else %}
+              {{ form.department(class="form-control form-control-lg", placeholder="Department") }}
+              {% endif %}
+            </div>
+
+            <div class="datepicker-container">
+              <div class="form-group">
+                {{ form.dateofbirth(class="form-control date-picker", placeholder="Date of Birth") }}
+              </div>
+            </div>
+
+            <div class="datepicker-container">
+              <div class="form-group">
+                {{ form.dateofjoining(class="form-control date-picker", placeholder="Date of Joining") }}
+              </div>
+            </div>
+
+
+
+            <div class="input-group no-border input-lg">
+              <div class="input-group-prepend">
+                <span class="input-group-text">
+                  <i class="now-ui-icons ui-1_lock-circle-open"></i>
+                </span>
+              </div>
+              <!-- <input type="password" class="form-control" placeholder="Password">
+              <input type="password" class="form-control" placeholder="Retype password"> -->
+              {% if form.password.errors %}
+              {{ form.password(class="form-control form-control-lg is-invalid", placeholder="Password") }}
+              <div class="invalid-feedback">
+                {% for error in form.password.errors %}
+                <span> {{error}} </span>
+                {% endfor %}
+              </div>
+              {% else %}
+              {{ form.password(class="form-control form-control-lg", placeholder="Password") }}
+              {% endif %}
+
+              {% if form.confirm_password.errors %}
+              {{ form.confirm_password(class="form-control form-control-lg is-invalid", placeholder="Retype Password") }}
+              <div class="invalid-feedback">
+                {% for error in form.confirm_password.errors %}
+                <span> {{error}} </span>
+                {% endfor %}
+              </div>
+              {% else %}
+              {{ form.confirm_password(class="form-control form-control-lg", placeholder="Retype Password") }}
+              {% endif %}
+            </div>
+
+
+            <div class="card-footer text-center">
+              {{ form.submit(class="btn btn-primary btn-lg btn-block btn-primary btn-round btn-outline-info") }}
+              {% if is_coe_loggedIn==False %}
+              <div class="pull-left">
+                <h6>
+                  <a href="login.html" class="link">Go to Login</a>
+                </h6>
+              </div>
+              {% endif %}
+              <div class="pull-right">
+                <h6>
+                  <a href="#pablo" class="link">Need Help?</a>
+                </h6>
+              </div>
+        </form>
+      </div>
+    </div>
+
+  </div>
+  </div>
+
+
+
+
+
+  <footer class="footer">
+    <div class="container">
+      <nav>
+        <ul>
+          <li>
+            <a href="index.html">
+              MarksU
+            </a>
+          </li>
+          <li>
+            <a href="index.html#about">
+              About Us
+            </a>
+          </li>
+        </ul>
+      </nav>
+      <div class="copyright" id="copyright">
+        &copy;
+        <script>
+          document.getElementById('copyright').appendChild(document.createTextNode(new Date().getFullYear()))
+              </script>, Designed by
+        <a href="http://it.becs.ac.in" target="_blank">IT Department, IIEST Shibpur</a>.
+      </div>
+    </div>
+    <a id="back2Top" title="Back to top" href="#">&#10148;</a>
+  </footer>
+  </div>
+
+
+
+  <!--   Core JS Files   -->
+  <script src="/static/js/core/jquery.min.js" type="text/javascript"></script>
+  <script src="/static/js/core/popper.min.js" type="text/javascript"></script>
+  <script src="/static/js/core/bootstrap.min.js" type="text/javascript"></script>
+  <!--  Plugin for Switches, full documentation here: http://www.jque.re/plugins/version3/bootstrap.switch/ -->
+  <script src="/static/js/plugins/bootstrap-switch.js"></script>
+  <!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
+  <script src="/static/js/plugins/nouislider.min.js" type="text/javascript"></script>
+  <!--  Plugin for the DatePicker, full documentation here: https://github.com/uxsolutions/bootstrap-datepicker -->
+  <script src="/static/js/plugins/bootstrap-datepicker.js" type="text/javascript"></script>
+  <!-- Control Center for Now Ui Kit: parallax effects, scripts for the example pages etc -->
+  <script src="/static/js/now-ui-kit.js" type="text/javascript"></script>
+  <script src="/static/js/bootstrap-select.min.js" type="text/javascript"></script>
+  <script>
+    $(document).ready(function() {
+      // the body of this function is in assets/js/now-ui-kit.js
+      nowuiKit.initSliders();
+    });
+
+    $(document).ready({
+   if (window.location.hash == "#show") {
+      $(".dash-mdt-details").show();
+   }
+});
+
+    $(window).scroll(function() {
+      var height = $(window).scrollTop();
+      if (height > 100) {
+        $('#back2Top').fadeIn();
+      } else {
+        $('#back2Top').fadeOut();
+      }
+    });
+
+
+    $(document).ready(function() {
+      $("#back2Top").click(function(event) {
+        event.preventDefault();
+        $("html, body").animate({
+          scrollTop: 0
+        }, "slow");
+        return false;
+      });
+
+    });
+
+  </script>
+</body>
+
+</html>

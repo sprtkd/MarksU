@@ -1,0 +1,26 @@
+{% extends 'admin/base.html' %}
+
+{% block head_css %}
+{{ super() }}
+{% endblock %}
+
+{% block body %}
+{{ super() }}
+<div class="wrapper">
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-10 col-sm-offset-1">
+            <h1>Admin Panel</h1>
+            <p class="lead">
+                Basic Actions.
+            </p>
+            <p>
+                Click on any Tab to view/edit!
+            </p>
+            <a class="btn btn-primary" href="/"><i class="glyphicon glyphicon-chevron-left"></i> Back to MarksU Home</a>
+        </div>
+    </div>
+</div>
+
+{% endblock body %}

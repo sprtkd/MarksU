@@ -24,11 +24,6 @@ def coe_login_checker():
 def home():
 	return render_template("index.html", is_coe_loggedIn=coe_login_checker())
 
-
-@app.route("/upload.html")
-def uploadExample():
-	return render_template("upload.html")
-
 @app.route("/upload", methods=['GET', 'POST'])
 def uploadProcessor():
 	try:
@@ -167,12 +162,11 @@ def redirect_to_profile():
 		if current_user.user_type==STUDENT_USER_FLAG:
 			return redirect(url_for('student_profile'))
 		else:
+			#print("->", hod_name)
 			return redirect(url_for('faculty_profile'))
 	else:
 		flash(f'You are Not Logged In', 'danger')
 		return redirect(url_for('home'))
-
-
 
 @app.route("/profile_student.html")
 def student_profile():
@@ -187,12 +181,17 @@ def student_profile():
 @app.route("/profile_faculty.html")
 def faculty_profile():
 	if current_user.is_active and current_user.user_type!=STUDENT_USER_FLAG:
+		faculty = Faculty.query.filter_by(email=current_user.email).first()
+		department = Department.query.filter_by(name=faculty.department).first()
+		hod_name = Faculty.query.filter_by(id=department.hod_id).first().name
 		user = Faculty.query.filter_by(email=current_user.email).first()
-		return render_template('profile_faculty.html', user=user)
+
+		subject = Subjects.query.filter_by(faculty_id=faculty.id)
+		subject = subject.all()
+		return render_template('profile_faculty.html', user=user, hod=hod_name, subjects=subject)
 	else:
 		flash(f'You are Not Logged In as Faculty', 'danger')
 		return redirect(url_for('home'))
-
 
 ################################################################################################################
 '''
